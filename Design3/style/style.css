@@ -1,0 +1,426 @@
+@charset "UTF-8";
+@font-face {
+  font-family: Pretendard;
+  src: url(/Design3/font/Pretendard-Regular.subset.woff) format(woff), url(/Design3/font/Pretendard-Regular.subset.woff2) format(woff2);
+  font-weight: 400;
+  font-style: normal;
+}
+@font-face {
+  font-family: Basteleur;
+  src: url(/Design3/font/Basteleur-Moonlight.woff) format(woff), url(/Design3/font/Basteleur-Moonlight.woff2) format(woff2);
+  font-weight: 400;
+  font-style: normal;
+}
+@font-face {
+  font-family: PicNic;
+  src: url(/Design3/font/PicNic-Regular.woff) format(woff), url(/Design3/font/PicNic-Regular.woff2) format(woff2);
+  font-weight: 400;
+  font-style: normal;
+}
+@font-face {
+  font-family: Anthony;
+  src: url(/Design3/font/Anthony.woff) format(woff), url(/Design3/font/Anthony.woff2) format(woff2);
+  font-weight: 400;
+  font-style: normal;
+}
+* {
+  margin: 0;
+  padding: 0;
+  text-decoration: none;
+  list-style: none;
+  font-weight: normal;
+  position: relative;
+  box-sizing: border-box;
+}
+
+h1,
+h2, h4 {
+  font-weight: 400;
+}
+
+h1, h4 {
+  line-height: 1;
+  color: var(--color);
+}
+
+h2 {
+  font-size: 10.3125rem;
+  font-family: "Anthony";
+  color: var(--color);
+  margin-top: -0.4em;
+}
+
+html {
+  font-size: 32px;
+}
+@media screen and (min-width: 980px) and (max-width: 1024px) {
+  html {
+    font-size: calc(12px + 1.5vw);
+  }
+}
+@media screen and (max-width: 1024px) {
+  html {
+    font-size: calc(12px + 1.3vw);
+  }
+}
+
+.title,
+.content {
+  position: fixed;
+  width: 100%;
+  padding: 0 0.9375rem;
+}
+
+.title {
+  top: 0.9375rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.5625rem;
+}
+
+.content {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  bottom: 0.9375rem;
+  padding: 0 0.9375rem;
+}
+.content .calender {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  position: fixed;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 30vw;
+  max-width: 376px;
+}
+.content .calender > div {
+  background-color: var(--color);
+  color: var(--background);
+  width: 15vw;
+  max-width: 188px;
+  max-height: 188px;
+  height: 15vw;
+  border-radius: 15vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 3.9rem;
+  line-height: 1em;
+  mix-blend-mode: lighten;
+}
+.content .calender > div:nth-child(1) {
+  order: 0;
+}
+.content .calender > div:nth-child(2) {
+  order: 2;
+}
+.content .calender > div:nth-child(3) {
+  order: 1;
+}
+.content .calender > div:nth-child(4) {
+  order: 3;
+}
+.content .calender > div:nth-child(1), .content .calender > div:nth-child(2) {
+  margin-right: -1vw;
+}
+.content .calender > div:nth-child(3), .content .calender > div:nth-child(4) {
+  margin-left: -1vw;
+}
+.content .calender > div:nth-child(1), .content .calender > div:nth-child(3) {
+  margin-bottom: -1vw;
+}
+.content .calender > div:nth-child(2), .content .calender > div:nth-child(4) {
+  margin-top: -1vw;
+}
+.content > div:last-child {
+  text-align: right;
+}
+
+.poster {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+html[data-weather=clear]:root {
+  --color: #232323;
+  --background: #FFe928;
+}
+html[data-weather=clear] .poster.background.snow {
+  display: none;
+}
+html[data-weather=clear] .poster.background.rain {
+  display: none;
+}
+html[data-weather=clear] .poster.background.cloudy {
+  display: none;
+}
+html[data-weather=clear] .poster.background {
+  background: linear-gradient(90deg, #F6F6F6 0%, #FFFFFF 2%, #CCCCCC 9%, #ABABAB 15%, #6C6C6C 32%, #929292 47%, #F7F7F7 67%, #CECECE 85%, #ABABAB 94%, #A3A3A3 97%, #A3A3A3 100%, #656565 100%);
+}
+html[data-weather=clear] .sun-circle {
+  background-color: #FFe928;
+  width: calc(100% - 3.25rem);
+  height: calc(100% - 3.25rem);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 100%;
+  overflow: hidden;
+  box-shadow: inset 0 4px 8px rgba(0, 0, 0, 0.2), inset 0 6px 20px rgba(0, 0, 0, 0.19);
+  /* 작고 넓은 내부 그림자 */
+}
+html[data-weather=clear] .sun-circle .sunny-sun {
+  width: 51.46vw;
+  height: 51.46vw;
+}
+html[data-weather=clear] .sun-circle .sunny-sun svg {
+  width: 100%;
+  height: 100%;
+}
+
+html[data-weather=snow]:root {
+  --color: #3f3b3b;
+  --background: #eef6eb;
+}
+html[data-weather=snow] .poster.background.sunny {
+  display: none;
+}
+html[data-weather=snow] .poster.background.rain {
+  display: none;
+}
+html[data-weather=snow] .poster.background.cloudy {
+  display: none;
+}
+html[data-weather=snow] .poster.background {
+  background-color: var(--background);
+}
+html[data-weather=snow] h2 {
+  font-family: "Oi", serif;
+  font-size: 5.5rem;
+  margin-top: -0.3em;
+}
+html[data-weather=snow] .footprints {
+  position: fixed;
+  color: var(--background);
+  font-family: "Noto sans TC", sans-serif;
+}
+html[data-weather=snow] .footprints > div {
+  position: fixed;
+  font-size: 10rem;
+  text-shadow: 2px 4px 6px rgba(255, 255, 255, 0.8), -2px -2px 4px rgba(231, 231, 231, 0.9);
+}
+html[data-weather=snow] .footprints > div:nth-child(1) {
+  font-size: 6rem;
+  top: 25vh;
+  left: 18vw;
+}
+html[data-weather=snow] .footprints > div:nth-child(2) {
+  font-size: 12rem;
+  top: 30vh;
+  left: 60vw;
+}
+html[data-weather=snow] .footprints > div:nth-child(3) {
+  font-size: 23rem;
+  top: 65vh;
+  left: 8vw;
+}
+
+html[data-weather=rain]:root {
+  --color: #000000;
+  --background: #92c4ff;
+}
+html[data-weather=rain] .poster.background.sunny {
+  display: none;
+}
+html[data-weather=rain] .poster.background.snow {
+  display: none;
+}
+html[data-weather=rain] .poster.background.cloudy {
+  display: none;
+}
+html[data-weather=rain] .poster.background {
+  background-color: #6b2bf4;
+}
+html[data-weather=rain] .poster.background .rainy-mood-holder {
+  display: flex;
+  width: 100%;
+}
+html[data-weather=rain] .poster.background .rainy-mood-holder > div {
+  width: 25%;
+  height: 50vh;
+  background: linear-gradient(180deg, rgba(217, 217, 217, 0) 1.04%, #92c4ff 51.04%, rgba(217, 217, 217, 0) 100%);
+}
+html[data-weather=rain] .poster.background .rainy-mood-holder > div:nth-child(even) {
+  top: 25vh;
+}
+html[data-weather=rain] h2 {
+  font-family: PicNic;
+  font-size: 10.3125rem;
+  margin-top: -0.4em;
+}
+html[data-weather=rain] .rain-holder {
+  position: fixed;
+  width: 6.25vw;
+  padding-bottom: 51.5%;
+}
+html[data-weather=rain] .rain-holder svg {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+html[data-weather=rain] .rain-holder svg path {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 0.1;
+  animation: dash 5s linear infinite;
+}
+html[data-weather=rain] .background .raindrops .rain-holder:nth-child(1) {
+  top: 5vh;
+  left: 4vw;
+}
+html[data-weather=rain] .background .raindrops .rain-holder:nth-child(2) {
+  top: 60vh;
+  left: 4vw;
+}
+html[data-weather=rain] .background .raindrops .rain-holder:nth-child(3) {
+  top: 40vh;
+  left: 80vw;
+}
+html[data-weather=rain] .background .raindrops .rain-holder:nth-child(4) {
+  top: -10vh;
+  left: 90vw;
+}
+html[data-weather=rain] .forward .raindrops .rain-holder:nth-child(1) {
+  top: -20vh;
+  left: 25vw;
+}
+html[data-weather=rain] .forward .raindrops .rain-holder:nth-child(2) {
+  top: 45vh;
+  left: 15vw;
+}
+html[data-weather=rain] .forward .raindrops .rain-holder:nth-child(3) {
+  top: 20vh;
+  left: 50vw;
+}
+@keyframes dash {
+  0% {
+    stroke-dashoffset: 1;
+    stroke-dasharray: 0.5;
+  }
+  80% {
+    stroke-dashoffset: 0;
+    stroke-dasharray: 1;
+  }
+  100% {
+    stroke-dashoffset: 0.5;
+    stroke-dasharray: 1;
+  }
+}
+
+html[data-weather=clouds]:root {
+  --color: #FF72AD;
+  --background: #000000;
+}
+html[data-weather=clouds] .poster.background.sunny {
+  display: none;
+}
+html[data-weather=clouds] .poster.background.snow {
+  display: none;
+}
+html[data-weather=clouds] .poster.background.rain {
+  display: none;
+}
+html[data-weather=clouds] .poster.background {
+  background-color: #42617E;
+}
+html[data-weather=clouds] .poster.background .clouds > div {
+  position: fixed;
+  background: radial-gradient(50% 50% at 50% 50%, #d9d9d9 0%, rgba(217, 217, 217, 0) 100%);
+  border-radius: 100%;
+  width: 60vw;
+  height: 30vw;
+  animation: moveClouds 2s infinite alternate;
+}
+html[data-weather=clouds] .poster.background .clouds > div:nth-child(even) {
+  animation-delay: 1s;
+}
+html[data-weather=clouds] .poster.background .clouds > div:nth-child(1) {
+  top: 10vw;
+  left: 30vh;
+}
+html[data-weather=clouds] .poster.background .clouds > div:nth-child(2) {
+  top: 80vw;
+  left: 40vh;
+}
+html[data-weather=clouds] .poster.background .clouds > div:nth-child(3) {
+  top: -10vw;
+  left: 50vh;
+}
+html[data-weather=clouds] .poster.background .clouds > div:nth-child(4) {
+  top: 10vw;
+  left: 70vh;
+}
+html[data-weather=clouds] .poster.background .clouds > div:nth-child(5) {
+  top: 55vw;
+  left: 40vh;
+}
+html[data-weather=clouds] .poster.background .clouds > div:nth-child(6) {
+  top: 50vw;
+  left: -3vh;
+}
+html[data-weather=clouds] .poster.background .clouds > div:nth-child(7) {
+  top: 70vw;
+  left: 15vh;
+}
+html[data-weather=clouds] .poster.background .clouds > div:nth-child(8) {
+  top: 30vw;
+  left: 30vh;
+}
+html[data-weather=clouds] .poster.background .clouds > div:nth-child(9) {
+  top: -10vw;
+  left: 0vh;
+}
+html[data-weather=clouds] .poster.background .clouds > div:nth-child(10) {
+  top: 15vw;
+  left: -5vh;
+}
+html[data-weather=clouds] .poster.background .circle {
+  position: fixed;
+  border: 0.97vw solid #FF72AD;
+  background: transparent;
+  border-radius: 100%;
+  animation: fadeOut 2s forwards;
+}
+html[data-weather=clouds] h2 {
+  font-family: "Rubik Puddles", system-ui;
+  font-size: 8rem;
+  margin-top: -0.2em;
+}
+@keyframes moveClouds {
+  0% {
+    transform: translate(0, 0);
+  }
+  100% {
+    transform: translate(5%, 5%);
+  }
+}
+@keyframes fadeOut {
+  0% {
+    opacity: 1;
+    transform: translate(0, 0);
+  }
+  40% {
+    transform: translate(-5%, -5%);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-5%, -15%);
+  }
+}/*# sourceMappingURL=style.css.map */
