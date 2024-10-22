@@ -1,0 +1,200 @@
+@charset "UTF-8";
+* {
+  box-sizing: border-box;
+  position: relative;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #31E6FF;
+  font-family: "Noto Sans KR", sans-serif;
+}
+
+h1,
+h2 {
+  font-family: "Bebas Neue", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  color: #FF008A;
+  margin: 0;
+  font-size: 2.8rem;
+  text-align: center;
+}
+
+.background {
+  display: flex;
+  /* 자식 요소를 플렉스 컨테이너로 만듭니다. */
+  justify-content: space-between;
+  /* 자식 요소들을 좌우로 공간을 균등하게 나눠 배치합니다. */
+  width: 100%;
+  /* 요소의 너비를 부모 요소의 100%로 설정합니다. */
+  height: 100vh;
+  /* 요소의 높이를 뷰포트 높이의 100%로 설정합니다. */
+  position: absolute;
+  /* 요소를 절대 위치로 설정합니다. */
+  padding: 0 16px;
+  /* 상하 패딩은 0, 좌우 패딩은 16px로 설정합니다. */
+}
+.background span {
+  display: block;
+  /* span 요소를 블록 요소로 만듭니다. 블록 요소로 만들어야지 height 조절을 할 수 있다. 인라인 요소는 height 조절이 불가능하다. */
+  height: 100%;
+  /* 부모 요소의 100% 높이를 차지합니다. */
+  background: linear-gradient(180deg, rgb(23, 255, 47) 0%, rgba(217, 217, 217, 0) 100%);
+  /* 세로 그라데이션 배경 설정 */
+  width: calc(11.1111111111% - 2.7vw);
+  /* 각 span 요소의 너비를 계산하여 설정합니다. */
+  margin-right: 2.7vw;
+  /* 각 span 요소의 오른쪽 마진을 2.7vw로 설정합니다. */
+}
+.background span:last-child {
+  margin-right: 0;
+  /* 마지막 span 요소의 오른쪽 마진을 0으로 설정합니다. */
+}
+
+.door-line {
+  height: 100vw;
+  width: 20px;
+  position: fixed;
+  z-index: 100;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: #31E6FF;
+  mix-blend-mode: exclusion;
+  animation: rotate 60s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+  animation-fill-mode: forwards;
+}
+
+.main {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.main h1 {
+  position: absolute;
+  bottom: 1.5rem;
+}
+
+.logo-holder {
+  display: flex;
+  justify-content: center;
+}
+.logo-holder img {
+  width: calc((100vw - 2rem) / 12 * 7);
+}
+
+.heart-holder {
+  margin: 3.25rem 0;
+}
+
+.contents {
+  max-width: 980px;
+  padding: 0 1rem;
+  margin: 10vh auto;
+}
+.contents p {
+  font-size: 1.7rem;
+  line-height: 1.7em;
+  padding-bottom: 0;
+}
+.contents p span {
+  font-family: "Bebas Neue", cursive;
+}
+
+table {
+  background-color: #fff;
+  border-top: 2px solid #FF008A;
+  border-bottom: 2px solid #FF008A;
+  width: 100%;
+  border-collapse: collapse;
+}
+table td,
+table tr,
+table th {
+  border: 1px solid #e2e2e2;
+  border-left: none;
+  border-right: none;
+}
+table th,
+table td {
+  padding: 0.2rem 0 0.3rem;
+}
+table td:nth-child(2) {
+  font-weight: 700;
+}
+
+a,
+a:link,
+a:visited {
+  color: inherit;
+  text-decoration: none;
+  /* Remove underline */
+}
+
+.anchor-holder a {
+  display: block;
+  text-align: center;
+  font-size: 1.7rem;
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+@media screen and (max-width: 1024px) {
+  .contents p {
+    font-size: 1.4rem;
+  }
+}
+@media screen and (max-width: 450px) {
+  .contents p {
+    font-size: 1.2rem;
+  }
+}
+@media screen and (max-width: 350px) {
+  .contents p {
+    font-size: 1.1rem;
+  }
+}
+@media screen and (max-width: 768px) {
+  .background {
+    padding: 0;
+  }
+  .background span {
+    margin: 0;
+    width: 25%;
+  }
+  .background span:nth-child(n+4) {
+    display: none;
+  }
+  .door-line {
+    height: 150vh;
+    width: 20px;
+    position: fixed;
+    z-index: 100;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: #31E6FF;
+    mix-blend-mode: exclusion;
+    animation: rotate 60s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+    animation-fill-mode: forwards;
+  }
+  .logo-holder {
+    width: 100%;
+    padding: 1rem;
+  }
+  .logo-holder img {
+    width: 100%;
+  }
+}/*# sourceMappingURL=style.css.map */

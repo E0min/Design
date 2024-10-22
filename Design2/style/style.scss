@@ -1,0 +1,185 @@
+// 변수 정의
+$lh: 1.55em;  // 기본 줄 높이
+$a_lh: calc(1rem * 1.55);  // 기본 폰트 크기와 줄 높이의 곱
+$marg: calc(1.5rem / 2);  // 마진의 반값
+$logo-height: calc((100vw - #{$marg} * 4) * 0.1573);  // 로고의 높이 계산
+$animation-duration: 7s;  // 애니메이션 지속 시간
+
+// 폰트 설정
+@font-face {
+    font-family: 'KoddiUD OnGothic';  // 폰트 패밀리 이름
+    src: url('/Design2/font/KoddiUDOnGothic-Regular.woff2') format('woff2'),  // woff2 형식의 폰트 파일 경로
+         url('/Design2/font/KoddiUDOnGothic-Regular.woff') format('woff');  // woff 형식의 폰트 파일 경로
+}
+
+// 공통 스타일
+* {
+    margin: 0;  // 기본 여백 제거
+    padding: 0;  // 기본 패딩 제거
+    position: relative;  // 상대 위치 설정
+    text-decoration: none;  // 텍스트 데코레이션 제거
+    list-style: none;  // 리스트 스타일 제거
+    box-sizing: border-box;  // 패딩과 border가 포함되어 width와 height를 계산함
+    font-family: 'KoddiUD OnGothic';  // 글꼴 설정
+}
+
+// CSS 변수 정의: 
+:root { // :root 선택자를 사용하면 문서 전체에 적용할 css변수를 정의할 수 있다.
+    --background: #000;  // 배경색
+    --color: #fff;  // 글자색
+    --line-height: #{$lh};  // 줄 높이
+}
+
+// 바디 스타일
+body {
+    background-color: var(--background);  // 배경색 설정
+    color: var(--color);  // 글자색 설정
+}
+
+// 배경 스타일
+.background {
+    position: fixed;  // background 전체가 고정되어 스크롤이 적용되지 않는다. 궁금하면 지워보도록
+    pointer-events: none;  // 이벤트 비활성화
+    top: 0;  // 상단 위치
+    left: 0;  // 왼쪽 위치
+}
+
+// 자/눈금 스타일
+.ruler {
+    @extend .background;  // .background 클래스를 확장하여 동일한 스타일을 상속
+    display: flex;  // flexbox 레이아웃을 사용하여 자식 요소들을 배치
+    justify-content: space-between;  // 자식 요소들 사이의 공간을 균등하게 분배
+    width: 100%;  // 요소의 너비를 100%로 설정
+    padding: 0 calc(#{$marg} * 2);  // 패딩을 수평 방향으로 $marg 변수 값의 두 배로 설정
+
+    span {
+        background-color: var(--color);  // CSS 변수 --color를 사용하여 배경색을 설정
+        height: 1rem;  // 요소의 높이를 1rem로 설정
+        width: 3px;  // 요소의 너비를 3px로 설정
+    }
+
+    &.ruler-top { // &는 부모 선택자를 참조하는 것으로 rurler의 속성을 전부 가진다.
+        top: 0;  // 요소를 상단에 위치시킴
+    }
+    &.ruler-bottom {
+        top: unset;  // top 값을 해제
+        bottom: 0;  // 요소를 하단에 위치시킴
+    }
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// 로고 스타일
+.logo {
+    display: flex;  // flexbox 레이아웃 사용
+    width: 100%;  // 너비 100%
+    height: 100%;  // 높이 100%
+    padding: calc(#{$marg} * 2);  // 패딩 설정
+
+    > div {
+        height: $logo-height;  // 로고 높이
+        width: 100%;  // 너비 100%
+        animation: logoScaler;  // 애니메이션 이름
+        animation-duration: 3s;  // 애니메이션 지속 시간
+        animation-fill-mode: forwards;  // 애니메이션 종료 후 상태 유지
+        animation-iteration-count: infinite;  // 무한 반복
+        animation-direction: alternate;  // 교차 방향
+        animation-timing-function: ease-in-out;  // 타이밍 함수
+
+        svg {
+            width: 100%;  // 너비 100%
+            height: 100%;  // 높이 100%
+
+            path {
+                fill: var(--color) !important;  // 경로 색상
+            }
+        }
+
+        &.group-1 { animation-name: logoScaler-largest; }  // 애니메이션 그룹 1
+        &.group-2 { animation-name: logoScaler-larger; animation-delay: calc(#{$animation-duration} / 5); }  // 애니메이션 그룹 2
+        &.group-3 { animation-delay: calc(#{$animation-duration} / 5 * 2); }  // 애니메이션 그룹 3
+        &.group-4 { animation-delay: calc(#{$animation-duration} / 5 * 3); }  // 애니메이션 그룹 4
+        &.group-5 { animation-delay: calc(#{$animation-duration} / 5 * 4); }  // 애니메이션 그룹 5
+        &.group-6 { animation-delay: calc(#{$animation-duration} / 5 * 5); }  // 애니메이션 그룹 6
+    }
+}
+
+// 링크 스타일
+a, a:link, a:visited {
+    text-decoration: none;  // 링크 밑줄 제거
+    color: inherit;  // 부모 요소의 색상 상속
+}
+
+// 링크 트리 스타일
+.link-tree {
+    font-size: calc(1rem + 0.3vw);  // 글자 크기
+    height: 100%;  // 높이 설정
+    line-height: $lh;  // 줄 높이 설정
+    counter-reset: linkTree;  // 카운터 초기화
+
+    li {
+        display: flex;  // flexbox 레이아웃 사용
+        align-items: center;  // 수직 정렬
+        position: fixed;  // 고정 위치
+
+        &::before {
+            counter-increment: linkTree;  // 카운터 증가
+            content: counter(linkTree);  // 카운터 값 표시
+            border: 3px solid;  // 테두리 설정
+            display: flex;  // Pseudo 요소의 디스플레이 설정
+            justify-content: center;  // 중앙 정렬
+            align-items: center;  // 수직 정렬
+            width: 1.2em;  // 너비 설정
+            height: 1.2em;  // 높이 설정
+            border-radius: 100px;  // 테두리 반경 설정
+            margin-right: 0.5rem;  // 오른쪽 마진
+        }
+
+        a {
+            border-bottom: 3px solid transparent;  // 링크 밑줄 투명
+        }
+
+        a:hover {
+            border-bottom: 3px solid;  // 링크 호버 시 밑줄
+        }
+    }
+}
+
+// 선 스타일
+.line {
+    width: 100%;  // 너비 100%
+    mix-blend-mode: difference;  // 혼합 모드 설정
+    bottom: calc(#{$marg} * 2);  // 하단 위치 설정
+
+    svg {
+        width: 100%;  // 너비 100%
+        height: 100%;  // 높이 100%
+
+        path {
+            stroke-dasharray: 1;  // 점선 배열
+            stroke-dashoffset: 1;  // 점선 오프셋
+            animation: dash 3s ease-in-out forwards;  // 애니메이션 적용
+        }
+    }
+}
+
+// 애니메이션 정의
+@keyframes dash {
+    from { stroke-dashoffset: 1; }  // 애니메이션 시작 시 오프셋
+    to { stroke-dashoffset: 0; }  // 애니메이션 끝 시 오프셋
+}
+
+@keyframes logoScaler {
+    0% { height: $logo_height; }  // 애니메이션 시작 시 높이
+    100% { height: 52%; }  // 애니메이션 끝 시 높이
+}
+
+@keyframes logoScaler-larger {
+    0% { height: $logo_height; }  // 애니메이션 시작 시 높이
+    100% { height: 73%; }  // 애니메이션 끝 시 높이
+}
+
+@keyframes logoScaler-largest {
+    0% { height: $logo_height; }  // 애니메이션 시작 시 높이
+    100% { height: 100%; }  // 애니메이션 끝 시 높이
+}

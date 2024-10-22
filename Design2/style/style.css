@@ -1,0 +1,176 @@
+@font-face {
+  font-family: "KoddiUD OnGothic";
+  src: url("/Design2/font/KoddiUDOnGothic-Regular.woff2") format("woff2"), url("/Design2/font/KoddiUDOnGothic-Regular.woff") format("woff");
+}
+* {
+  margin: 0;
+  padding: 0;
+  position: relative;
+  text-decoration: none;
+  list-style: none;
+  box-sizing: border-box;
+  font-family: "KoddiUD OnGothic";
+}
+
+:root {
+  --background: #000;
+  --color: #fff;
+  --line-height: 1.55em;
+}
+
+body {
+  background-color: var(--background);
+  color: var(--color);
+}
+
+.background, .ruler {
+  position: fixed;
+  pointer-events: none;
+  top: 0;
+  left: 0;
+}
+
+.ruler {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  padding: 0 calc(0.75rem * 2);
+}
+.ruler span {
+  background-color: var(--color);
+  height: 1rem;
+  width: 3px;
+}
+.ruler.ruler-top {
+  top: 0;
+}
+.ruler.ruler-bottom {
+  top: unset;
+  bottom: 0;
+}
+
+.logo {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  padding: calc(0.75rem * 2);
+}
+.logo > div {
+  height: calc((100vw - 0.75rem * 4) * 0.1573);
+  width: 100%;
+  animation: logoScaler;
+  animation-duration: 3s;
+  animation-fill-mode: forwards;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+  animation-timing-function: ease-in-out;
+}
+.logo > div svg {
+  width: 100%;
+  height: 100%;
+}
+.logo > div svg path {
+  fill: var(--color) !important;
+}
+.logo > div.group-1 {
+  animation-name: logoScaler-largest;
+}
+.logo > div.group-2 {
+  animation-name: logoScaler-larger;
+  animation-delay: calc(7s / 5);
+}
+.logo > div.group-3 {
+  animation-delay: calc(7s / 5 * 2);
+}
+.logo > div.group-4 {
+  animation-delay: calc(7s / 5 * 3);
+}
+.logo > div.group-5 {
+  animation-delay: calc(7s / 5 * 4);
+}
+.logo > div.group-6 {
+  animation-delay: calc(7s / 5 * 5);
+}
+
+a, a:link, a:visited {
+  text-decoration: none;
+  color: inherit;
+}
+
+.link-tree {
+  font-size: calc(1rem + 0.3vw);
+  height: 100%;
+  line-height: 1.55em;
+  counter-reset: linkTree;
+}
+.link-tree li {
+  display: flex;
+  align-items: center;
+  position: fixed;
+}
+.link-tree li::before {
+  counter-increment: linkTree;
+  content: counter(linkTree);
+  border: 3px solid;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 1.2em;
+  height: 1.2em;
+  border-radius: 100px;
+  margin-right: 0.5rem;
+}
+.link-tree li a {
+  border-bottom: 3px solid transparent;
+}
+.link-tree li a:hover {
+  border-bottom: 3px solid;
+}
+
+.line {
+  width: 100%;
+  mix-blend-mode: difference;
+  bottom: calc(0.75rem * 2);
+}
+.line svg {
+  width: 100%;
+  height: 100%;
+}
+.line svg path {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  animation: dash 3s ease-in-out forwards;
+}
+
+@keyframes dash {
+  from {
+    stroke-dashoffset: 1;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+@keyframes logoScaler {
+  0% {
+    height: calc((100vw - 0.75rem * 4) * 0.1573);
+  }
+  100% {
+    height: 52%;
+  }
+}
+@keyframes logoScaler-larger {
+  0% {
+    height: calc((100vw - 0.75rem * 4) * 0.1573);
+  }
+  100% {
+    height: 73%;
+  }
+}
+@keyframes logoScaler-largest {
+  0% {
+    height: calc((100vw - 0.75rem * 4) * 0.1573);
+  }
+  100% {
+    height: 100%;
+  }
+}/*# sourceMappingURL=style.css.map */

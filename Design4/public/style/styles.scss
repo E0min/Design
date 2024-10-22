@@ -1,0 +1,296 @@
+$background : #252525;
+$lavender: #C3A7FF;
+$lh: 1.4375em;
+
+@keyframes rotatePanel {
+    0% {
+        transform: translateZ(10px) rotate3d(1, 0, 0, 0deg);
+    }
+
+    25% {
+        transform: translateZ(10px) rotate3d(1, 0, 0, -50deg);
+    }
+
+    50% {
+        transform: translateZ(10px) rotate3d(1, 0, 0, 0deg);
+    }
+
+    75% {
+        transform: translateZ(10px) rotate3d(1, 0, 0, 50deg);
+    }
+
+    100% {
+        transform: translateZ(10px) rotate3d(1, 0, 0, 0deg);
+
+    }
+}
+
+* {
+    //별표 태그에 삽입하면 모든 태그에 설정이 적용된다.
+    margin: 0px;
+    padding: 0px;
+    list-style: none;
+    text-decoration: none;
+    font-family: 'Pretendard';
+    word-break: keep-all; // 페이지 크기 조절 시 문장이 띄어쓰기 단위대로 줄바꿈이 일어나서 더 자연스럽게 보임
+    position: relative; // z-index, top, bottom, left, right 등의 속성을 사용하기 위해
+    box-sizing: border-box; //요소의 **width**와 **height**가 border + padding + content를 모두 포함합니다.
+
+}
+
+html {
+    font-size: 16px; //1rem
+    font-family: 'Pretendard';
+
+}
+
+body {
+    background-color: $background;
+    color: #EDEDED;
+    line-height: $lh; // 줄간격
+}
+
+a,
+a:link,
+a:visited {
+    color: $lavender;
+}
+
+header {
+
+    top: 1rem;
+    left: 1rem;
+
+    position: fixed;
+    z-index: 100;
+
+    .gnb-logo {
+        width: 34.372vw;
+        padding-bottom: 41.072%; //부모 요소의 크기에 따라 동적으로 비율을 유지하면서 SVG가 표시되도록 설계하는 것이 중요합니다.
+        //CSS에서 **padding 값은 % 단위로 줄 경우, 기준이 부모의 width**입니다.
+
+        svg {
+            // 별도의 크기 설정을 안하면 내부 콘텐츠의 고유 크기에 따라 렌더링 된다.
+            width: 100%; //부모요소의 크기에 따라 가변적으로 크기가 변한다.
+            height: 100%;
+        }
+    }
+}
+
+.info {
+    width: calc(((100vw - 2rem)/ 12)*4 - 1.25rem);
+    position: fixed;
+    top: 1rem;
+    right: 1rem;
+}
+
+.background-panel {
+
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    .panel-pillar {
+        position: fixed;
+        top: 50%;
+        left: 0;
+        width: 100vw;
+        background-color: $lavender;
+        height: 2px;
+        transform: translateY(-50%); // 요소 높이의 50%만큼 위로 이동
+    }
+
+    /*정가운데 위치시키는 법: 50% 이동후에 요소의 크기의 절반만큼 반대로 50% 이동시키면 된다.*/
+
+    .panel-holder {
+        display: flex;
+        justify-content: center;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        padding: 0 1rem;
+        perspective: 100vw;
+
+        >div {
+            width: 16.11vw;
+            height: 16.11vw;
+            animation-name: rotatePanel;
+            animation-duration: 10s;
+            animation-iteration-count: infinite;
+            animation-timing-function: linear;
+
+            img {
+                width: 100%;
+                height: 100%;
+                display: block;
+                object-fit: contain;
+                object-position: center;
+            }
+
+            &:nth-child(2),
+            &:nth-child(5) {
+                //nth-child()는 부모의 모든 자식 요소 중에서 n번째 위치한 요소를 선택합니다.
+
+                animation-direction: reverse;
+            }
+
+            &:nth-child(1),
+            &:nth-child(6) {
+                animation-duration: 7s;
+                animation-delay: 2s;
+            }
+
+            &:nth-of-type(3) {
+                //nth-of-type()는 부모 요소 안에서 부모와 같은 유형의 자식 중 n번째 요소를 선택합니다.
+
+                animation-duration: 5s;
+                animation-direction: reverse;
+            }
+        }
+    }
+
+}
+
+.contents {
+    margin-top: 100vh;
+
+    .grid {
+        margin: 1rem;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 2rem;
+
+        >div {
+            box-shadow: 0px 5px 12px rgba(0, 0, 0, 0.4);
+            background-color:transparent;
+            // 부모 div의 너비와 높이 설정
+            width: calc(90% / 3);
+            aspect-ratio: 1/1;  // 필요에 따라 명시적으로 높이 설정 가능
+
+            >img {
+                width: 100%;  // 부모 div 너비에 맞게 설정
+                height: auto;  // 비율에 맞게 이미지 높이 설정
+                object-fit: cover;  // 이미지가 div 크기에 맞도록 자름 (필요한 경우)
+            }
+        }
+    }
+}
+
+
+p {
+    padding-bottom: $lh;
+}
+
+nav {
+    margin: 1rem;
+
+    position: fixed;
+    bottom: 1rem;
+    left: 1rem;
+    font-size: 4.4rem;
+    z-index: 100;
+}
+
+button{
+    all: unset; // 기본 스타일 모두 초기화
+    cursor: pointer; // 커서를 버튼처럼 보이게 설정
+    background:transparent;
+    -webkit-appearance: none;
+    box-shadow: none;
+    outline: none;
+}
+
+#brushViewer{
+    width: 30.34vw;
+    aspect-ratio: 1 / 1;
+
+}
+#brushSize{
+    display: none;
+}
+#submitImage{
+    cursor: pointer;
+}
+
+.drawer {
+    display: flex;
+    padding: 1rem;
+    
+    >div:nth-child(1) {
+        z-index: 100;
+        width: 40%;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        padding-top: calc(33.472vw * 0.45);
+        padding-bottom: calc(4.5rem + 1rem);
+        >div:first-of-type{
+            display: flex;
+            justify-content: flex-start;
+            .control-pan{
+                margin-left: 1rem;
+                width: 1.875rem;
+                aspect-ratio: 1 / 1;
+                display: flex;
+                flex-direction: column;
+                #submitImage{
+                    flex-grow: 3; // flex grow를 이용해서 요소 분리
+                    display: flex;
+                    align-items: flex-start;
+                }
+
+            }
+        }
+        
+    }
+
+    >div:nth-child(2) {
+        width: 60%;
+        height: calc(100vh - 2rem);
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+    }
+
+    .canvas-holder {
+        width: 60%;
+
+    }
+}
+
+.palette {
+    display: flex;
+    justify-content: flex-start;
+    padding-top: 1rem;
+    flex-wrap: wrap;
+
+    li {
+        padding-right: 0.3rem;
+        padding-bottom: 0.3rem;
+
+        input[type=radio] {
+            display: none;
+
+            &:checked~label {
+                border-radius: 100rem;
+            }
+        }
+
+        &:last-of-type {
+            padding-right: 0;
+        }
+
+        label {
+            width: 3.4rem;
+            height: 3.4rem;
+            display: block;
+        }
+    }
+}
+#jsCanvas{
+
+}

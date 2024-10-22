@@ -1,0 +1,231 @@
+$sub-primary: #31E6FF;
+$primary: #FF008A;
+
+* {
+    box-sizing: border-box;
+    position: relative; // 역할을 잘 모르겠음
+}
+
+body {
+    //body의 마진과 padding을 0으로 설정해서 백그라운드 색상이 전부 적용되게 하고 body 태그 내의 글씨는 Noto Sans KR을 적용
+    margin: 0;
+    padding: 0;
+    background-color: $sub-primary;
+    font-family: "Noto Sans KR", sans-serif;
+}
+
+h1,
+h2 {
+    // h1태그의 서체는 Bebas Neue로 적용
+    font-family: "Bebas Neue", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    color: $primary;
+    margin: 0;
+    font-size: 2.8rem;
+    text-align: center;
+}
+
+.background {
+    // 백그라운드에서는 span태그를 이용해서 세로 바 형성
+    display: flex;
+    /* 자식 요소를 플렉스 컨테이너로 만듭니다. */
+    justify-content: space-between;
+    /* 자식 요소들을 좌우로 공간을 균등하게 나눠 배치합니다. */
+    width: 100%;
+    /* 요소의 너비를 부모 요소의 100%로 설정합니다. */
+    height: 100vh;
+    /* 요소의 높이를 뷰포트 높이의 100%로 설정합니다. */
+    position: absolute;
+    /* 요소를 절대 위치로 설정합니다. */
+    padding: 0 16px;
+
+    /* 상하 패딩은 0, 좌우 패딩은 16px로 설정합니다. */
+    span {
+        display: block;
+        /* span 요소를 블록 요소로 만듭니다. 블록 요소로 만들어야지 height 조절을 할 수 있다. 인라인 요소는 height 조절이 불가능하다. */
+        height: 100%;
+        /* 부모 요소의 100% 높이를 차지합니다. */
+        background: linear-gradient(180deg, rgba(23, 255, 47, 1) 0%, rgba(217, 217, 217, 0) 100%);
+        /* 세로 그라데이션 배경 설정 */
+        width: calc(100% / 9 - 2.7vw);
+        /* 각 span 요소의 너비를 계산하여 설정합니다. */
+        //100% 중에서 9개의 막대가 필요하니 9로 나누고 간격 만큼 빼줬다. 간격은 40px로 전체 1440px 중 2.7% 에 해당함
+        margin-right: 2.7vw;
+
+        /* 각 span 요소의 오른쪽 마진을 2.7vw로 설정합니다. */
+        &:last-child {
+            margin-right: 0;
+            /* 마지막 span 요소의 오른쪽 마진을 0으로 설정합니다. */
+        }
+    }
+}
+
+.door-line {
+    height: 100vw;
+    width: 20px;
+    position: fixed;
+    z-index: 100; // 요소들 간 순서 배치 , 무조건 포지션이 적용되어야함
+    margin-left: auto;
+    margin-right: auto;
+    background-color: $sub-primary;
+    mix-blend-mode: exclusion;
+    animation: rotate 60s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+    animation-fill-mode: forwards;
+}
+
+.main {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center; // 가로 정렬
+    align-items: center; // 세로 정렬
+    flex-direction: column;
+
+    h1 {
+        position: absolute;
+        bottom: 1.5rem;
+
+    }
+
+}
+
+.logo-holder {
+    display: flex;
+    justify-content: center;
+
+    img {
+        width: calc((100vw - 2rem) / 12 * 7)
+    }
+}
+
+.heart-holder {
+    margin: 3.25rem 0;
+}
+
+.contents {
+    max-width: 980px;
+    padding: 0 1rem;
+    margin: 10vh auto;
+
+    p {
+        font-size: 1.7rem;
+        line-height: 1.7em;
+        padding-bottom: 0;
+
+        span {
+            font-family: "Bebas Neue", cursive;
+        }
+    }
+
+}
+
+table {
+    background-color: #fff;
+    border-top: 2px solid $primary;
+    border-bottom: 2px solid $primary;
+    width: 100%;
+    border-collapse: collapse;
+
+    td,
+    tr,
+    th {
+        border: 1px solid #e2e2e2;
+        border-left: none;
+        border-right: none;
+    }
+
+    th,
+    td {
+        padding: 0.2rem 0 0.3rem;
+    }
+
+    td:nth-child(2) {
+        font-weight: 700;
+    }
+
+}
+
+a,
+a:link,
+a:visited {
+    color: inherit;
+    text-decoration: none;
+    /* Remove underline */
+
+}
+
+.anchor-holder {
+    a {
+        display: block;
+        text-align: center;
+        font-size: 1.7rem;
+    }
+
+}
+
+@keyframes rotate {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@media screen and (max-width:1024px){
+    .contents p{
+        font-size: 1.4rem; // 모바일 화면의 폰트크기가 19.2px 일 경우 1rem(16px)의 1.2 배정도 된다.
+    }
+
+}
+
+@media screen and (max-width:450px){
+    .contents p{
+        font-size: 1.2rem; // 모바일 화면의 폰트크기가 19.2px 일 경우 1rem(16px)의 1.2 배정도 된다.
+    }
+
+}
+
+@media screen and (max-width:350px){
+    .contents p{
+        font-size: 1.1rem; // 모바일 화면의 폰트크기가 19.2px 일 경우 1rem(16px)의 1.2 배정도 된다.
+    }
+
+}
+
+@media screen and (max-width:768px){
+    .background {
+         padding:0;
+         span{
+            &:nth-child(n+4){
+                display: none;
+            }
+            margin:0;
+            width:25%
+         }
+    }
+    .door-line {
+        height: 150vh;
+        width: 20px;
+        position: fixed;
+        z-index: 100; // 요소들 간 순서 배치 , 무조건 포지션이 적용되어야함
+        margin-left: auto;
+        margin-right: auto;
+        background-color: $sub-primary;
+        mix-blend-mode: exclusion;
+        animation: rotate 60s;
+        animation-iteration-count: infinite;
+        animation-timing-function: linear;
+        animation-fill-mode: forwards;
+    }
+    .logo-holder {
+        width: 100%;
+        padding:1rem;
+        img{
+            width:100%;
+        }
+    }
+}
